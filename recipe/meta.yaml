@@ -9,7 +9,7 @@ source:
     git_rev: menuinst+branding
 
 build:
-  number: 14
+  number: 15
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
