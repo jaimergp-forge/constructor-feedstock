@@ -1,4 +1,4 @@
-{% set version = "3.3b" %}
+{% set version = "4.0b" %}
 
 package:
   name: constructor
@@ -9,7 +9,7 @@ source:
     git_rev: menuinst+branding
 
 build:
-  number: 3
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
