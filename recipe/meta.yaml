@@ -1,4 +1,4 @@
-{% set version = "4.0b" %}
+{% set version = "4.0b1" %}
 
 package:
   name: constructor
