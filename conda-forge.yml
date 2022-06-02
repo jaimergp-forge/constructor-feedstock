@@ -1,11 +1,11 @@
+build_platform:
+  osx_arm64: osx_64
+channels:
+  targets:
+    - - napari
+conda_forge_output_validation: true
 provider:
   win: github_actions
   osx: github_actions
   linux: github_actions
-conda_forge_output_validation: true
-channels:
-  targets:
-    - - napari
-build_platform:
-  osx_arm64: osx_64
 test_on_native_only: true
