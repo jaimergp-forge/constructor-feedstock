@@ -1,4 +1,8 @@
 channel_targets:
   - napari bundle_tools
 channel_sources:
-  - napari/label/bundle_tools,conda-forge
+  - napari/label/bundle_tools_2,conda-forge
+target_os:
+  - linux  # [linux]
+  - osx    # [osx]
+  - win    # [win]

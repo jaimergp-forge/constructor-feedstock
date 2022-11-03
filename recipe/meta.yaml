@@ -1,4 +1,4 @@
-{% set version = "4.0b1" %}
+{% set version = "4.0b2" %}
 
 package:
   name: constructor
@@ -6,25 +6,27 @@ package:
 
 source:
   - git_url: https://github.com/jaimergp/constructor.git
-    git_rev: menuinst+branding
+    git_rev: menuinst-cep
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
+  noarch: python
 
 requirements:
   host:
-    - python
+    - python >=3.7
     - pip
   run:
-    - conda >=4.6
-    - python
+    - __{{ target_os }}
+    - conda >=4.14
+    - python >=3.7
     - ruamel_yaml >=0.11.14,<0.16
     - conda-standalone
     - pillow >=3.1  # [win or osx]
-    - nsis >=3.01  # [win]
+    - nsis >=3.08   # [win]
 
 test:
   source_files:
