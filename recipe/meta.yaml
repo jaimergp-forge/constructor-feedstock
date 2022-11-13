@@ -6,25 +6,27 @@ package:
 
 source:
   - git_url: https://github.com/jaimergp/constructor.git
-    git_rev: menuinst+branding
+    git_rev: menuinst-cep
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
+  noarch: python
 
 requirements:
   host:
-    - python
+    - python >=3.7
     - pip
   run:
-    - conda >=4.6
-    - python
+    - __{{ target_os }}
+    - conda >=4.14
+    - python >=3.7
     - ruamel_yaml >=0.11.14,<0.16
     - conda-standalone
     - pillow >=3.1  # [win or osx]
-    - nsis >=3.01  # [win]
+    - nsis >=3.08   # [win]
 
 test:
   source_files:
@@ -36,6 +38,11 @@ test:
     - pytest
   commands:
     - pytest -v tests
+    - set "CONSTRUCTOR_SIGNTOOL_PATH=C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x86\signtool.exe"  # [win]
+    - set "CONSTRUCTOR_SIGNING_CERTIFICATE=certificate.pfx"   # [win]
+    - set "CONSTRUCTOR_PFX_CERTIFICATE_PASSWORD=1234"  # [win]
+    - powershell scripts\create_self_signed_certificate.ps1  # [win]
+    - copy /Y "%CONSTRUCTOR_SIGNING_CERTIFICATE%" examples\signing\certificate.pfx  # [win]
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     - python scripts/run_examples.py  # [not aarch64]
     - constructor -V

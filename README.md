@@ -22,7 +22,12 @@ Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>All platforms:</td>
+    <td>
+      <img src="https://img.shields.io/badge/noarch-disabled-lightgrey.svg" alt="noarch disabled">
+    </td>
+  </tr>
 </table>
 
 Current release info
@@ -42,16 +47,41 @@ conda config --add channels napari
 conda config --set channel_priority strict
 ```
 
-Once the `napari` channel has been enabled, `constructor` can be installed with:
+Once the `napari` channel has been enabled, `constructor` can be installed with `conda`:
 
 ```
 conda install constructor
 ```
 
-It is possible to list all of the versions of `constructor` available on your platform with:
+or with `mamba`:
+
+```
+mamba install constructor
+```
+
+It is possible to list all of the versions of `constructor` available on your platform with `conda`:
 
 ```
 conda search constructor --channel napari
+```
+
+or with `mamba`:
+
+```
+mamba search constructor --channel napari
+```
+
+Alternatively, `mamba repoquery` may provide more information:
+
+```
+# Search all versions available on your platform:
+mamba repoquery search constructor --channel napari
+
+# List packages depending on `constructor`:
+mamba repoquery whoneeds constructor --channel napari
+
+# List dependencies of `constructor`:
+mamba repoquery depends constructor --channel napari
 ```
 
 

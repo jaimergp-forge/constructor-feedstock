@@ -6,3 +6,8 @@ conda_forge_output_validation: true
 channels:
   targets:
     - - napari
+noarch_platforms:
+  - linux_64
+  - osx_64
+  - win_64
+upload_on_branch: main
