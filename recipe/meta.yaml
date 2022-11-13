@@ -38,6 +38,11 @@ test:
     - pytest
   commands:
     - pytest -v tests
+    - set "CONSTRUCTOR_SIGNTOOL_PATH=C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x86\signtool.exe"  # [win]
+    - set "CONSTRUCTOR_SIGNING_CERTIFICATE=certificate.pfx"   # [win]
+    - set "CONSTRUCTOR_PFX_CERTIFICATE_PASSWORD=1234"  # [win]
+    - powershell scripts\create_self_signed_certificate.ps1  # [win]
+    - copy /Y "%CONSTRUCTOR_SIGNING_CERTIFICATE%" examples\signing\certificate.pfx  # [win]
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     - python scripts/run_examples.py  # [not aarch64]
     - constructor -V
