@@ -1,5 +1,5 @@
-{% set version = "4.0b6" %}
-{% set git_rev = "f8449ed" %}
+{% set version = "4.0b7" %}
+{% set git_rev = "a9987b2" %}
 
 package:
   name: constructor
