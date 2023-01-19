@@ -1,5 +1,5 @@
 {% set version = "4.0b8" %}
-{% set git_rev = "cbc8fb3" %}
+{% set git_rev = "e266c5c" %}
 
 package:
   name: constructor
@@ -12,7 +12,7 @@ source:
     git_rev: {{ git_rev }}
 
 build:
-  number: 1
+  number: 2
   string: "pyh{{ PKG_HASH }}_{{ git_rev }}_{{ PKG_BUILDNUM }}"
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
