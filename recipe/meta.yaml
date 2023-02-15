@@ -1,5 +1,5 @@
-{% set version = "4.0b8" %}
-{% set git_rev = "e266c5c" %}
+{% set version = "4.0b9" %}
+{% set git_rev = "3ab19c5" %}
 
 package:
   name: constructor
@@ -12,7 +12,7 @@ source:
     git_rev: {{ git_rev }}
 
 build:
-  number: 2
+  number: 0
   string: "pyh{{ PKG_HASH }}_{{ git_rev }}_{{ PKG_BUILDNUM }}"
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
@@ -25,7 +25,7 @@ requirements:
     - pip
   run:
     - __{{ target_os }}
-    - conda >=4.14
+    - conda >=22.9,<23.1.0a0
     - python >=3.7
     - ruamel_yaml >=0.11.14,<0.16
     - conda-standalone
