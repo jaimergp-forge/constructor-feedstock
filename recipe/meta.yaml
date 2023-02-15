@@ -12,7 +12,7 @@ source:
     git_rev: {{ git_rev }}
 
 build:
-  number: 0
+  number: 1
   string: "pyh{{ PKG_HASH }}_{{ git_rev }}_{{ PKG_BUILDNUM }}"
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
@@ -40,6 +40,7 @@ test:
   requires:
     - pillow >=3.1
     - pytest
+    - sed  # [osx]
   commands:
     - pytest -v tests
     - set "CONSTRUCTOR_SIGNTOOL_PATH=C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x86\signtool.exe"  # [win]
@@ -48,6 +49,7 @@ test:
     - powershell scripts\create_self_signed_certificate.ps1  # [win]
     - copy /Y "%CONSTRUCTOR_SIGNING_CERTIFICATE%" examples\signing\certificate.pfx  # [win]
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
+    - "sed -i.bak 's/name: Miniforge3/name: Miniforge3-example/' examples/miniforge/construct.yaml"  # [osx]
     - python scripts/run_examples.py  # [not aarch64]
     - constructor -V
   imports:
