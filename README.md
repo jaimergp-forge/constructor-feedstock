@@ -1,11 +1,11 @@
-About constructor
-=================
+About constructor-feedstock
+===========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/constructor-feedstock/blob/main/LICENSE.txt)
 
 Home: http://github.com/conda/constructor
 
 Package license: BSD-3-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/constructor-feedstock/blob/master/LICENSE.txt)
 
 Summary: create installer from conda packages
 
@@ -112,6 +112,8 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@isuruf](https://github.com/isuruf/)
+* [@jaimergp](https://github.com/jaimergp/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@jschueller](https://github.com/jschueller/)
 * [@mbargull](https://github.com/mbargull/)
