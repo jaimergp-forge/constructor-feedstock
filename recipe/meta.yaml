@@ -1,23 +1,30 @@
-{% set version = "4.0b9" %}
-{% set git_rev = "3ab19c5" %}
+{% set version = "4.0b10" %}
+{% set git_rev = "1913d14" %}
 
 package:
   name: constructor
   version: {{ version }}
 
 source:
-  - git_url: https://github.com/jaimergp/constructor.git
-    # see https://github.com/conda/constructor/pull/474
-    # for commit hashes
-    git_rev: {{ git_rev }}
+  git_url: https://github.com/jaimergp/constructor.git
+  # see https://github.com/conda/constructor/pull/474
+  # for commit hashes
+  git_rev: {{ git_rev }}
+
+package:
+  name: constructor
+  version: {{ version }}
+
+source:
+  url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
+  sha256: 93c5334dc689cc45c487be0b0370f2f86857cd3a1b4e816defb634585eac5aa2
 
 build:
-  number: 1
-  string: "pyh{{ PKG_HASH }}_{{ git_rev }}_{{ PKG_BUILDNUM }}"
+  noarch: python
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
-  noarch: python
 
 requirements:
   host:
@@ -25,32 +32,33 @@ requirements:
     - pip
   run:
     - __{{ target_os }}
-    - conda >=22.9,<23.1.0a0
+    - conda >=4.6
     - python >=3.7
-    - ruamel_yaml >=0.11.14,<0.16
+    - ruamel.yaml >=0.11.14,<0.18
     - conda-standalone
-    - pillow >=3.1  # [win or osx]
-    - nsis >=3.08   # [win]
+    - pillow >=3.1
+    - nsis >=3.08      # [win]
+  run_constrained:   # [unix]
+    - nsis >=3.08      # [unix]
 
 test:
+  files:
+    - test_win.bat
   source_files:
     - tests
     - scripts
     - examples
   requires:
-    - pillow >=3.1
+    - pip
     - pytest
-    - sed  # [osx]
+    - nsis * *log*  # [win]
   commands:
+    - pip check
     - pytest -v tests
-    - set "CONSTRUCTOR_SIGNTOOL_PATH=C:\Program Files (x86)\Windows Kits\10\bin\10.0.17763.0\x86\signtool.exe"  # [win]
-    - set "CONSTRUCTOR_SIGNING_CERTIFICATE=certificate.pfx"   # [win]
-    - set "CONSTRUCTOR_PFX_CERTIFICATE_PASSWORD=1234"  # [win]
-    - powershell scripts\create_self_signed_certificate.ps1  # [win]
-    - copy /Y "%CONSTRUCTOR_SIGNING_CERTIFICATE%" examples\signing\certificate.pfx  # [win]
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
-    - "sed -i.bak 's/name: Miniforge3/name: Miniforge3-example/' examples/miniforge/construct.yaml"  # [osx]
-    - python scripts/run_examples.py  # [not aarch64]
+    - set "NSIS_USING_LOG_BUILD=1"  # [win]
+    - python scripts/run_examples.py  # [unix and not aarch64]
+    - test_win.bat  # [win]
     - constructor -V
   imports:
     - constructor
@@ -70,6 +78,8 @@ about:
 
 extra:
   recipe-maintainers:
+    - isuruf
+    - jaimergp
     - jakirkham
     - jschueller
     - mbargull
