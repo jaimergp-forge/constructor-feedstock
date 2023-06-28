@@ -11,14 +11,6 @@ source:
   # for commit hashes
   git_rev: {{ git_rev }}
 
-package:
-  name: constructor
-  version: {{ version }}
-
-source:
-  url: https://github.com/conda/constructor/archive/{{ version }}.tar.gz
-  sha256: 93c5334dc689cc45c487be0b0370f2f86857cd3a1b4e816defb634585eac5aa2
-
 build:
   noarch: python
   number: 0
