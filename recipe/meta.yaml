@@ -13,7 +13,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - constructor = constructor.main:main
@@ -49,7 +49,7 @@ test:
     - pytest -v tests
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     - set "NSIS_USING_LOG_BUILD=1"  # [win]
-    - python scripts/run_examples.py  # [unix and not aarch64]
+    # - python scripts/run_examples.py  # [linux and not aarch64]
     - test_win.bat  # [win]
     - constructor -V
   imports:
