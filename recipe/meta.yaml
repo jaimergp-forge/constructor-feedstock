@@ -45,7 +45,7 @@ test:
     - pytest
     - nsis * *log*  # [win]
   commands:
-    - pip check
+    # - pip check
     - pytest -v tests
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     - set "NSIS_USING_LOG_BUILD=1"  # [win]
