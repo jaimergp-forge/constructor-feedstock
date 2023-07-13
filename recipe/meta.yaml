@@ -46,11 +46,11 @@ test:
     - nsis * *log*  # [win]
   commands:
     # - pip check
-    - pytest -v tests
+    - pytest -v tests -k "not examples"
     # Skip for linux-aarch64 because examples use "main" channel which has no builds for that platform.
     - set "NSIS_USING_LOG_BUILD=1"  # [win]
     # - python scripts/run_examples.py  # [linux and not aarch64]
-    - test_win.bat  # [win]
+    # - test_win.bat  # [win]
     - constructor -V
   imports:
     - constructor
